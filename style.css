@@ -465,6 +465,7 @@ form .btn:focus{
 }
 #loginform{
   left: -300px;
+  width: 100%;
 }
 #regform{
   left: 0;
@@ -480,6 +481,24 @@ form a{
   margin: 8px;
   transform: translateX(100px);
   transition: transform 1s;
+}
+
+.password{
+  display: flex;
+  align-items: center;
+  border: 1px solid #ad4400;
+}
+.password input{
+  width: 100%;
+  height: 12px;
+  outline: 0;
+  border: 0;
+}
+.password img{
+  margin-right: 10px;
+  width: 15px;
+  cursor: pointer;
+  padding: 5px 0;
 }
 
 
