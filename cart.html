@@ -9,161 +9,183 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
     rel="stylesheet">
-  <title>Cloth</title>
+  <title>Shopping Cart</title>
+
 </head>
 
-<!--Header section-->
+<style>
+  .cart-icon {
+    position: relative;
+    display: inline-block;
+  }
+
+  #cartCount {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    min-width: 20px;
+    text-align: center;
+  }
+</style>
 
 
-<div class="container">
-  <div class="navbar">
-    <div class="logo">
-      <img src="images/logo.png" width="125px" alt="">
-    </div>
-    <nav>
-      <ul id="menu-items">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="product.html">Product</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="account.html">Account</a></li>
-      </ul>
-    </nav>
-    <a class="active" href="cart.html"><img src="images/cart.png" width="30px" height="30px" alt=""></a>
-    <img src="images/menu.png" class="menu-icon" onclick="menutoggle()" alt="">
-  </div>
-
-</div>
-
-
-<!--car items details-->
-
-<div class="small-container cart-page">
-  <table>
-    <tr>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Sub Total</th>
-    </tr>
-
-    <tr>
-      <td>
-        <div class="cart-info">
-          <img src="images/buy-1.jpg" alt="">
-          <div>
-            <p>Red Printed T-Shirt</p>
-            <small>Rs.2000.00</small>
-            <br>
-            <a href="">Remove</a>
-          </div>
-        </div>
-      </td>
-      <td><input type="number" value="1"></td>
-      <td>Rs.2000.00</td>
-    </tr>
-
-    <tr>
-      <td>
-        <div class="cart-info">
-          <img src="images/buy-2.jpg" alt="">
-          <div>
-            <p>Red Printed T-Shirt</p>
-            <small>Rs.2500.00</small>
-            <br>
-            <a href="">Remove</a>
-          </div>
-        </div>
-      </td>
-      <td><input type="number" value="1"></td>
-      <td>Rs.2500.00</td>
-    </tr>
-
-    <tr>
-      <td>
-        <div class="cart-info">
-          <img src="images/buy-3.jpg" alt="">
-          <div>
-            <p>Red Printed T-Shirt</p>
-            <small>Rs.1500.00</small>
-            <br>
-            <a href="">Remove</a>
-          </div>
-        </div>
-      </td>
-      <td><input type="number" value="1"></td>
-      <td>Rs.1500.00</td>
-    </tr>
-  </table>
-
-  <div class="total-price">
-    <table>
-      <tr>
-        <td>Sub Total</td>
-        <td>Rs.6000.00</td>
-      </tr>
-      <tr>
-        <td>Tax</td>
-        <td>Rs.300.00</td>
-      </tr>
-      <tr>
-        <td>Total</td>
-        <td>Rs.6300.00</td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-
-
-
-<!--footer-->
-<div class="footer">
+<body>
+  <!--Header section-->
   <div class="container">
-    <div class="row">
-      <div class="footer-col-1">
-        <h3>Download Our App</h3>
-        <p>Download our App Android and IOS</p>
+    <div class="navbar">
+      <div class="logo">
+        <img src="images/logo.png" width="125px" alt="">
+      </div>
+      <nav>
+        <ul id="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="product.html">Product</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="account.html">Account</a></li>
+        </ul>
+      </nav>
+      <a href="cart.html" class="cart-icon">
+        <img src="images/cart.png" width="30px" height="30px" alt="">
+        <span id="cartCount">0</span>
+      </a>
 
-        <div class="app-logo">
-          <img src="images/play-store.png">
-          <img src="images/app-store.png" alt="">
+      <img src="images/menu.png" class="menu-icon" onclick="menutoggle()" alt="">
+    </div>
+  </div>
+  <h1>Your Shopping Cart</h1>
+  <div class="cart-container" id="cartItems">
+    <!-- Cart items will be dynamically rendered here -->
+  </div>
+  <div class="final">
+    <p class="total">Total: Rs. <span id="totalPrice">0</span></p>
+
+    <a href="#" class="btn order">Place Order</a>
+  </div>
+
+  <!--footer-->
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col-1">
+          <h3>Download Our App</h3>
+          <p>Download our App Android and IOS</p>
+          <div class="app-logo">
+            <img src="images/play-store.png">
+            <img src="images/app-store.png" alt="">
+          </div>
+        </div>
+
+        <div class="footer-col-2">
+          <img src="images/logo-white.png" alt="">
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias molestias aspernatur ad excepturi beatae
+          </p>
+        </div>
+
+        <div class="footer-col-3">
+          <h3>Useful Links</h3>
+          <ul>
+            <li>Coupons</li>
+            <li>Blog Post</li>
+            <li>Return Policy</li>
+            <li>Terms & Conditions</li>
+          </ul>
+        </div>
+
+        <div class="footer-col-4">
+          <h3>Follow Us</h3>
+          <ul>
+            <li>Facebook</li>
+            <li>Instagram</li>
+            <li>Tik-Tok</li>
+            <li>YouTube</li>
+          </ul>
         </div>
       </div>
-
-      <div class="footer-col-2">
-        <img src="images/logo-white.png" alt="">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias molestias aspernatur ad excepturi beatae</p>
-      </div>
-
-      <div class="footer-col-3">
-        <h3>Usefull Links</h3>
-        <ul>
-          <li>Coupons</li>
-          <li>Blog Post</li>
-          <li>Return Policy</li>
-          <li>Terms & Condition</li>
-        </ul>
-      </div>
-
-      <div class="footer-col-4">
-        <h3>Follow Us</h3>
-        <ul>
-          <li>Facebook</li>
-          <li>Instagram</li>
-          <li>Tik-Tok</li>
-          <li>You-Tube</li>
-        </ul>
-      </div>
+      <hr>
+      <p class="copyright">Copyright-2025 Tharindu Malshan</p>
     </div>
-    <hr>
-    <p class="copyright">Copyright-2025 Tharindu Malshan</p>
   </div>
-</div>
 
+  <script>
+    // Retrieve the cart from localStorage or initialize an empty array
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsContainer = document.getElementById('cartItems');
+    const totalPriceContainer = document.getElementById('totalPrice');
 
-<script src="script.js"></script>
+    // Function to update the cart count badge on the cart icon
+    function updateCartCount() {
+      const cartCountElement = document.getElementById('cartCount');
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Sum of quantities
+      cartCountElement.textContent = totalItems; // Update badge
+    }
+
+    // Function to update the quantity of an item
+    function updateQuantity(index, change) {
+      cart[index].quantity = Math.max(1, cart[index].quantity + change); // Prevent quantity below 1
+      localStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart
+      renderCart(); // Re-render the cart
+    }
+
+    // Function to remove an item from the cart
+    function removeCartItem(index) {
+      cart.splice(index, 1); // Remove item at index
+      localStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart
+      renderCart(); // Re-render the cart
+    }
+
+    // Function to render the cart items
+    function renderCart() {
+      cartItemsContainer.innerHTML = ''; // Clear existing items
+      let total = 0;
+
+      // Render each cart item
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.classList.add('cart-item');
+        cartItemDiv.innerHTML = `
+          <div class="cart-item-info">
+            <h3>${item.name}</h3>
+            <span class="size">Size: ${item.size}</span>
+            <span>Price: Rs. ${item.price.toFixed(2)}</span>
+          </div>
+          <div class="cart-item-actions">
+            <div class="quantity-controls">
+              <span> Quantity : <span>
+              <button onclick="updateQuantity(${index}, -1)">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="updateQuantity(${index}, 1)">+</button>
+            </div>
+            <span>Subtotal: Rs. ${subtotal.toFixed(2)}</span>
+            <button onclick="removeCartItem(${index})">Remove</button>
+          </div>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+      });
+
+      // Update total price
+      totalPriceContainer.textContent = total.toFixed(2);
+
+      // Update the cart count badge
+      updateCartCount();
+    }
+
+    // Initial setup
+    updateCartCount();
+    renderCart();
+  </script>
+  <script src="script.js"></script>
 
 </body>
 
