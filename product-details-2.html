@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+    rel="stylesheet">
+  <title>Product Details</title>
+</head>
+
+<body>
+
+  <!--Header section-->
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <img src="images/logo.png" width="125px" alt="">
+      </div>
+      <nav>
+        <ul id="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="product.html">Product</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="account.html">Account</a></li>
+        </ul>
+      </nav>
+      <a href="cart.html" class="cart-icon">
+        <img src="images/cart.png" width="30px" height="30px" alt="">
+        <span id="cartCount">0</span>
+      </a>
+      <img src="images/menu.png" class="menu-icon" onclick="menutoggle()" alt="">
+    </div>
+  </div>
+
+  <!--single product details-->
+  <div class="small-container single-product">
+    <div class="row">
+      <div class="col-2">
+        <img src="images/buy-3.jpg" width="100%" id="main-img" alt="">
+      </div>
+
+      <div class="col-2">
+        <p>Home/Trousers</p>
+        <h1>Men's Trousers</h1>
+        <h4>Rs.1500</h4>
+        <select id="sizeSelector">
+          <option value="">Select Size</option>
+          <option value="XXL">XXL</option>
+          <option value="XL">XL</option>
+          <option value="L">L</option>
+          <option value="M">M</option>
+          <option value="S">S</option>
+        </select>
+        <input type="number" id="quantityInput" value="1" min="1">
+        <a href="#" class="btn" onclick="addToCart()">Add To Cart</a>
+
+        <div class="size-chart">
+          <h3 onclick="toggleSizeChart()">Size Chart <i id="sizeChartIcon" class='bx bx-chevron-down'></i></h3>
+          <img src="images/SIZE-CHART-FOR-MENS-FULL-PANT.webp" alt="Size Chart" id="sizeChartImage"
+            style="display: none;">
+        </div>
+
+        <h3>Product Details <i class='bx bx-right-indent'></i></h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ratione debitis incidunt similique animi
+          eius aspernatur hic ipsa nihil numquam?</p>
+      </div>
+    </div>
+  </div>
+
+  <!--footer-->
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col-1">
+          <h3>Download Our App</h3>
+          <p>Download our App Android and IOS</p>
+          <div class="app-logo">
+            <img src="images/play-store.png">
+            <img src="images/app-store.png" alt="">
+          </div>
+        </div>
+
+        <div class="footer-col-2">
+          <img src="images/logo-white.png" alt="">
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias molestias aspernatur ad excepturi beatae
+          </p>
+        </div>
+
+        <div class="footer-col-3">
+          <h3>Useful Links</h3>
+          <ul>
+            <li>Coupons</li>
+            <li>Blog Post</li>
+            <li>Return Policy</li>
+            <li>Terms & Conditions</li>
+          </ul>
+        </div>
+
+        <div class="footer-col-4">
+          <h3>Follow Us</h3>
+          <ul>
+            <li>Facebook</li>
+            <li>Instagram</li>
+            <li>Tik-Tok</li>
+            <li>YouTube</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="copyright">Copyright-2025 Tharindu Malshan</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+
+    // size cart js
+
+    function toggleSizeChart() {
+      const sizeChartImage = document.getElementById("sizeChartImage");
+      const sizeChartIcon = document.getElementById("sizeChartIcon");
+
+      if (sizeChartImage.style.display === "none") {
+        sizeChartImage.style.display = "block";
+        sizeChartIcon.classList.remove("bx-chevron-down");
+        sizeChartIcon.classList.add("bx-chevron-up");
+      } else {
+        sizeChartImage.style.display = "none";
+        sizeChartIcon.classList.remove("bx-chevron-up");
+        sizeChartIcon.classList.add("bx-chevron-down");
+      }
+    }
+
+    // Retrieve the cart from localStorage or initialize an empty array
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Function to add an item to the cart
+    function addToCart() {
+      const name = "Men's Trouser"; // Static product name
+      const price = 1500; // Static product price
+      const size = document.getElementById('sizeSelector').value;
+      const quantity = parseInt(document.getElementById('quantityInput').value);
+
+      if (!size) {
+        alert('Please select a size.');
+        return;
+      }
+
+      // Check if the item already exists in the cart
+      const existingItem = cart.find(item => item.name === name && item.size === size);
+      if (existingItem) {
+        existingItem.quantity += quantity; // Update quantity
+      } else {
+        cart.push({ name, price, size, quantity }); // Add new item
+      }
+
+      // Save the updated cart in localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Update the cart count badge
+      updateCartCount();
+
+      alert(`${name} (${size}) (${quantity}) has been added to the cart.`);
+    }
+
+    // Function to update the cart count badge
+    function updateCartCount() {
+      const cartCountElement = document.getElementById('cartCount');
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Calculate total quantity
+      cartCountElement.textContent = totalItems; // Update badge
+    }
+
+    // Initial setup: update cart count on page load
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+  </script>
+
+</body>
+
+</html>
